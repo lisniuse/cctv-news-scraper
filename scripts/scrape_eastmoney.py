@@ -115,6 +115,12 @@ def scrape_news(target_date=None, headless=False):
                 const videos = element.querySelectorAll('video');
                 videos.forEach(v => v.remove());
 
+                const links = element.querySelectorAll('a');
+                for (const a of links) {
+                    const text = a.textContent || '';
+                    a.replaceWith(document.createTextNode(text));
+                }
+
                 const all = element.querySelectorAll('*');
                 for (const el of all) {
                     const allowedAttrs = ['src', 'href', 'colspan', 'rowspan', 'title', 'alt'];
